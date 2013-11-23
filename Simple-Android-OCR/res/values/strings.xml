@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DatumDroidOCRActivity!</string>
+    <string name="app_name">GetText</string>
+    <string name="button_text">Get Text!</string>
+    <string name="text_hint">See what we get</string>
+
+</resources>
