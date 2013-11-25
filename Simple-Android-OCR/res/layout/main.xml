@@ -4,6 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -15,5 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_hint" />
+
+
 
 </LinearLayout>

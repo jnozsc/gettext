@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
 import android.app.Activity;
@@ -21,8 +22,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
@@ -34,7 +39,8 @@ public class SimpleAndroidOCRActivity extends Activity {
 	// You should have the trained data file in assets folder
 	// You can get them at:
 	// http://code.google.com/p/tesseract-ocr/downloads/list
-	public static final String lang = "eng";
+	//public static final String lang = "eng";
+	public String lang = "eng";
 
 	private static final String TAG = "SimpleAndroidOCR.java";
 
@@ -64,18 +70,29 @@ public class SimpleAndroidOCRActivity extends Activity {
 
 		}
 		
+		// handle different input languages
+		ArrayList<String> langs = new ArrayList<String>();
+		langs.add("eng");
+		langs.add("chi_sim");
+		langs.add("hin");
+		// end of different input languages
+		
+		
 		// lang.traineddata file with the app (in assets folder)
 		// You can get them at:
 		// http://code.google.com/p/tesseract-ocr/downloads/list
 		// This area needs work and optimization
-		if (!(new File(DATA_PATH + "tessdata/" + lang + ".traineddata")).exists()) {
+		
+		// here, add a for loop, copy all language files, nice, it works
+		for(String lang_file:langs){
+		if (!(new File(DATA_PATH + "tessdata/" + lang_file + ".traineddata")).exists()) {
 			try {
 
 				AssetManager assetManager = getAssets();
-				InputStream in = assetManager.open("tessdata/" + lang + ".traineddata");
+				InputStream in = assetManager.open("tessdata/" + lang_file + ".traineddata");
 				//GZIPInputStream gin = new GZIPInputStream(in);
 				OutputStream out = new FileOutputStream(DATA_PATH
-						+ "tessdata/" + lang + ".traineddata");
+						+ "tessdata/" + lang_file + ".traineddata");
 
 				// Transfer bytes from in to out
 				byte[] buf = new byte[1024];
@@ -88,10 +105,11 @@ public class SimpleAndroidOCRActivity extends Activity {
 				//gin.close();
 				out.close();
 				
-				Log.v(TAG, "Copied " + lang + " traineddata");
+				Log.v(TAG, "Copied " + lang_file + " traineddata");
 			} catch (IOException e) {
-				Log.e(TAG, "Was unable to copy " + lang + " traineddata " + e.toString());
+				Log.e(TAG, "Was unable to copy " + lang_file + " traineddata " + e.toString());
 			}
+		}
 		}
 
 		super.onCreate(savedInstanceState);
@@ -104,7 +122,31 @@ public class SimpleAndroidOCRActivity extends Activity {
 		_button.setOnClickListener(new ButtonClickHandler());
 
 		_path = DATA_PATH + "/ocr.jpg";
+		
+		Spinner _spinner = (Spinner) findViewById(R.id.language_spinner);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,langs);  
+		_spinner.setAdapter(adapter);
+		_spinner.setOnItemSelectedListener(new SpinnerXMLSelectedListener());  
+		_spinner.setVisibility(View.VISIBLE);
 	}
+	
+	class SpinnerXMLSelectedListener implements OnItemSelectedListener{  
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			Spinner _spinner = (Spinner) findViewById(R.id.language_spinner);
+			lang = (String) _spinner.getAdapter().getItem(arg2);			
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}  
+          
+    }  
+	
 
 	public class ButtonClickHandler implements View.OnClickListener {
 		public void onClick(View view) {
@@ -210,6 +252,7 @@ public class SimpleAndroidOCRActivity extends Activity {
 
 		TessBaseAPI baseApi = new TessBaseAPI();
 		baseApi.setDebug(true);
+		Log.v(TAG, "lang is "+lang);
 		baseApi.init(DATA_PATH, lang);
 		baseApi.setImage(bitmap);
 		
