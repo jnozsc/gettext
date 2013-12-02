@@ -7,20 +7,37 @@
     <Spinner
         android:id="@+id/language_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
     
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_text" />
-
+    <Button
+        android:id="@+id/gallary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_gallery" />
+    
     <EditText
         android:id="@+id/field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_hint" />
 
+    <Button
+        android:id="@+id/translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/translate" />
 
+    <TextView
+        android:id="@+id/translatedText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:textColor="#000000"
+        android:text="@string/translatedText"/>
 
 </LinearLayout>

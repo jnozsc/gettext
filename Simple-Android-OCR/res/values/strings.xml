@@ -3,7 +3,10 @@
 
     <string name="hello">Hello World, DatumDroidOCRActivity!</string>
     <string name="app_name">GetText</string>
-    <string name="button_text">Get Text!</string>
+    <string name="button_text">take a new pic!</string>
     <string name="text_hint">See what we get</string>
+    <string name="button_gallery">pick up a pic from gallery</string>
+    <string name="translate">translate!</string>
+    <string name="translatedText"> </string>
 
 </resources>
