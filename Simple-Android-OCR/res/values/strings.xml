@@ -8,5 +8,7 @@
     <string name="button_gallery">pick up a pic from gallery</string>
     <string name="translate">translate!</string>
     <string name="translatedText"> </string>
+    <string name="input">Select the original language</string>
+    <string name="output">Select the translated language</string>
 
 </resources>

@@ -46,6 +46,7 @@ public class SimpleAndroidOCRActivity extends Activity {
 	// http://code.google.com/p/tesseract-ocr/downloads/list
 	// public static final String lang = "eng";
 	public String lang = "eng";
+	public String outputLanguage = "en";
 
 	private static final String TAG = "gettext";
 
@@ -150,6 +151,19 @@ public class SimpleAndroidOCRActivity extends Activity {
 
 		// translate button and controller
 
+		// output language spinner
+		ArrayList<String> output_langs = new ArrayList<String>();
+		output_langs.add("en");
+		output_langs.add("ZH-CN");
+		output_langs.add("hin");
+		Spinner output_spinner = (Spinner) findViewById(R.id.output_language_spinner);
+		ArrayAdapter<String> output_adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, output_langs);
+		output_spinner.setAdapter(output_adapter);
+		output_spinner
+				.setOnItemSelectedListener(new OutputSpinnerXMLSelectedListener());
+		output_spinner.setVisibility(View.VISIBLE);
+
 	}
 
 	class SpinnerXMLSelectedListener implements OnItemSelectedListener {
@@ -159,6 +173,21 @@ public class SimpleAndroidOCRActivity extends Activity {
 			// TODO Auto-generated method stub
 			Spinner _spinner = (Spinner) findViewById(R.id.language_spinner);
 			lang = (String) _spinner.getAdapter().getItem(arg2);
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+		}
+	}
+
+	class OutputSpinnerXMLSelectedListener implements OnItemSelectedListener {
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			Spinner output_spinner = (Spinner) findViewById(R.id.output_language_spinner);
+			outputLanguage = (String) output_spinner.getAdapter().getItem(arg2);
 		}
 
 		@Override
@@ -187,7 +216,7 @@ public class SimpleAndroidOCRActivity extends Activity {
 			// startGalleryActivity();
 			MyAsyncTask MyAsyncTask = new MyAsyncTask();
 			// TODO: setting output language
-			String outputLanguage = "ZH-CN";
+			// String outputLanguage = "ZH-CN";
 			// end of TODO
 			String result = null;
 			try {
