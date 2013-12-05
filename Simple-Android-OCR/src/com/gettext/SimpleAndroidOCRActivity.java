@@ -86,7 +86,7 @@ public class SimpleAndroidOCRActivity extends Activity {
 		// handle different input languages
 		ArrayList<String> langs = new ArrayList<String>();
 		langs.add("eng");
-		//langs.add("chi_sim");
+		// langs.add("chi_sim");
 		langs.add("chi_tra");
 		langs.add("hin");
 		// end of different input languages
@@ -166,14 +166,13 @@ public class SimpleAndroidOCRActivity extends Activity {
 		output_spinner
 				.setOnItemSelectedListener(new OutputSpinnerXMLSelectedListener());
 		output_spinner.setVisibility(View.VISIBLE);
-		
+
 		// database buttons
-		history =  (Button) findViewById(R.id.history);
+		history = (Button) findViewById(R.id.history);
 		history.setOnClickListener(new historyButtonClickHandler());
-		
+
 		save_history = (Button) findViewById(R.id.save_history);
 		save_history.setOnClickListener(new savehistoryButtonClickHandler());
-		
 
 	}
 
@@ -285,28 +284,30 @@ public class SimpleAndroidOCRActivity extends Activity {
 			return "ZH-CN";
 		} else if (input.equals("chi_tra")) {
 			return "ZH-TW";
-		}else if (input.equals("hid")) {
+		} else if (input.equals("hid")) {
 			return "hi";
 		}
 		// default
 		return "en";
 	}
-	
+
 	// database onclick
-	
+
 	public class historyButtonClickHandler implements View.OnClickListener {
 		public void onClick(View view) {
-			Intent intent = new Intent(SimpleAndroidOCRActivity.this, ViewHistory.class);
+			Intent intent = new Intent(SimpleAndroidOCRActivity.this,
+					ViewHistory.class);
 			startActivity(intent);
 		}
 	}
-	
+
 	public class savehistoryButtonClickHandler implements View.OnClickListener {
 		public void onClick(View view) {
 			Log.v(TAG, "Save to History");
 			MyDatabase db = new MyDatabase(getApplicationContext());
 			TextView translatedText = (TextView) findViewById(R.id.translatedText);
-			db.addText(_field.getText().toString(), translatedText.getText().toString());
+			db.addText(_field.getText().toString(), translatedText.getText()
+					.toString());
 		}
 	}
 
