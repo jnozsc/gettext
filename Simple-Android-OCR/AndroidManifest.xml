@@ -22,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="@string/history"
+            android:name="com.gettext.ViewHistory">
+            </activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

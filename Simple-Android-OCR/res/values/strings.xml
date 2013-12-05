@@ -10,5 +10,7 @@
     <string name="translatedText"> </string>
     <string name="input">Select the original language</string>
     <string name="output">Select the translated language</string>
+    <string name="history">HISTORY</string>
+    <string name="save_history">SAVE TO HISTORY</string>
 
 </resources>

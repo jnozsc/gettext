@@ -60,5 +60,18 @@
         android:background="#FFFFFF"
         android:textColor="#000000"
         android:text="@string/translatedText"/>
+    
+    <Button
+        android:id="@+id/save_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_history" />
+    
+    
+     <Button
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/history" />
 
 </LinearLayout>

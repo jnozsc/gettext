@@ -53,6 +53,8 @@ public class SimpleAndroidOCRActivity extends Activity {
 	protected Button _button;
 	protected Button loadbutton;
 	protected Button translateButton;
+	protected Button history;
+	protected Button save_history;
 	// protected ImageView _image;
 	protected EditText _field;
 	protected String _path;
@@ -164,6 +166,14 @@ public class SimpleAndroidOCRActivity extends Activity {
 		output_spinner
 				.setOnItemSelectedListener(new OutputSpinnerXMLSelectedListener());
 		output_spinner.setVisibility(View.VISIBLE);
+		
+		// database buttons
+		history =  (Button) findViewById(R.id.history);
+		history.setOnClickListener(new historyButtonClickHandler());
+		
+		save_history = (Button) findViewById(R.id.save_history);
+		save_history.setOnClickListener(new savehistoryButtonClickHandler());
+		
 
 	}
 
@@ -280,6 +290,24 @@ public class SimpleAndroidOCRActivity extends Activity {
 		}
 		// default
 		return "en";
+	}
+	
+	// database onclick
+	
+	public class historyButtonClickHandler implements View.OnClickListener {
+		public void onClick(View view) {
+			Intent intent = new Intent(SimpleAndroidOCRActivity.this, ViewHistory.class);
+			startActivity(intent);
+		}
+	}
+	
+	public class savehistoryButtonClickHandler implements View.OnClickListener {
+		public void onClick(View view) {
+			Log.v(TAG, "Save to History");
+			MyDatabase db = new MyDatabase(getApplicationContext());
+			TextView translatedText = (TextView) findViewById(R.id.translatedText);
+			db.addText(_field.getText().toString(), translatedText.getText().toString());
+		}
 	}
 
 	protected void startGalleryActivity() {
