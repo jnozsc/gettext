@@ -84,7 +84,8 @@ public class SimpleAndroidOCRActivity extends Activity {
 		// handle different input languages
 		ArrayList<String> langs = new ArrayList<String>();
 		langs.add("eng");
-		langs.add("chi_sim");
+		//langs.add("chi_sim");
+		langs.add("chi_tra");
 		langs.add("hin");
 		// end of different input languages
 
@@ -154,7 +155,7 @@ public class SimpleAndroidOCRActivity extends Activity {
 		// output language spinner
 		ArrayList<String> output_langs = new ArrayList<String>();
 		output_langs.add("en");
-		output_langs.add("ZH-CN");
+		output_langs.add("ZH-TW");
 		output_langs.add("hin");
 		Spinner output_spinner = (Spinner) findViewById(R.id.output_language_spinner);
 		ArrayAdapter<String> output_adapter = new ArrayAdapter<String>(this,
@@ -272,7 +273,9 @@ public class SimpleAndroidOCRActivity extends Activity {
 			return "en";
 		} else if (input.equals("chi_sim")) {
 			return "ZH-CN";
-		} else if (input.equals("hid")) {
+		} else if (input.equals("chi_tra")) {
+			return "ZH-TW";
+		}else if (input.equals("hid")) {
 			return "hi";
 		}
 		// default
